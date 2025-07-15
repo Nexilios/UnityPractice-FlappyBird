@@ -8,7 +8,7 @@ public class PipeMoveScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -deadZone)
+        if (transform.position.y < deadZone)
         {
             Destroy(gameObject);
             return;
