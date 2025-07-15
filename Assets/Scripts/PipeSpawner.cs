@@ -17,18 +17,18 @@ public class PipeSpawner : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (pipePrefab) 
+        if (!pipePrefab) return; 
+        
+        if (_timer < spawnRate)
         {
-            if (_timer < spawnRate)
-            {
-                _timer += Time.deltaTime;
-            }
-            else
-            {
-                SpawnPipe();
-                _timer = 0f;
-            }
+            _timer += Time.deltaTime;
         }
+        else
+        {
+            SpawnPipe();
+            _timer = 0f;
+        }
+        
     }
 
     private void SpawnPipe()
