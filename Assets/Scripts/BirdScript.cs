@@ -6,6 +6,7 @@ public class BirdScript : MonoBehaviour
     public float flapStrength = 10f;
     public float ceilLimit = 17f;
     public float floorLimit = -17f;
+    public Animator wingAnimator;
     
     [SerializeField]
     private GameManager gameManager;
@@ -18,6 +19,8 @@ public class BirdScript : MonoBehaviour
 
         if (!birdRigidBody) return;
         _birdCollider = birdRigidBody.GetComponent<Collider2D>();
+        
+        if (wingAnimator) wingAnimator.enabled = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,6 +46,11 @@ public class BirdScript : MonoBehaviour
         if (Input.GetKeyDown("space"))
         {
             birdRigidBody.linearVelocity = Vector2.up * flapStrength;
+
+            if (!wingAnimator) return;
+            wingAnimator.enabled = true;
+            wingAnimator.Update(0f);
+            wingAnimator.Play("Wing_Flap",0, 0f);
         }
     }
 }
