@@ -8,6 +8,6 @@ public class GameOverUIScript : MonoBehaviour
     {
         if (!scoreText) return;
         
-        scoreText.text = "Hi Score: " + PlayerPrefs.GetInt("HighScore");
+        scoreText.text = "HI SCORE: " + PlayerPrefs.GetInt("HighScore");
     }
 }
