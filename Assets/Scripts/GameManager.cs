@@ -17,16 +17,17 @@ public class GameManager : MonoBehaviour
         score = 0;
         gameOverScreen.SetActive(false);
 
-        if (scoreUI)
-        {
-            scoreUI.SetActive(true);
-            scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
-            scoreText.text = score.ToString();
-        }
+        if (!scoreUI) return;
+        
+        scoreUI.SetActive(true);
+        scoreText = scoreUI.GetComponent<TextMeshProUGUI>();
+        scoreText.text = score.ToString();
     }
     
     public void AddScore(int scoreToAdd)
     {
+        if (isGameOver) return;
+        
         score += scoreToAdd;
         scoreText.text = score.ToString();
     }
