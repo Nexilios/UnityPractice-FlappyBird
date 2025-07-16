@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public bool isGameOver;
     public GameObject gameOverScreen;
     public GameObject scoreUI;
+    public AudioSource scoreAudio;
     
     [SerializeField]
     private TextMeshProUGUI scoreText;
@@ -28,8 +29,10 @@ public class GameManager : MonoBehaviour
     {
         if (isGameOver) return;
         
+        if (scoreAudio) scoreAudio.Play();
+        
         score += scoreToAdd;
-        scoreText.text = score.ToString();
+        if (scoreText) scoreText.text = score.ToString();
     }
 
     public void RestartGame()
