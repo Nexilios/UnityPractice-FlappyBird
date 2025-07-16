@@ -40,9 +40,9 @@ public class GameManager : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
-    public void QuitGame()
+    public void QuitToMainMenu()
     {
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 
     public void GameOver()
