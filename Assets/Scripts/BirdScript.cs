@@ -4,6 +4,8 @@ public class BirdScript : MonoBehaviour
 {
     public Rigidbody2D birdRigidBody;
     public float flapStrength = 10f;
+    public float ceilLimit = 17f;
+    public float floorLimit = -17f;
     
     [SerializeField]
     private GameManager gameManager;
@@ -26,13 +28,19 @@ public class BirdScript : MonoBehaviour
     private void Update()
     {
         if (!gameManager) return;
-
-        if (gameManager.isGameOver && _birdCollider.enabled)
+        
+        if (gameManager.isGameOver)
         {
-            _birdCollider.enabled = false;
+            if (_birdCollider.enabled) _birdCollider.enabled = false;
+            return;
         }
         
-        if (Input.GetKeyDown("space") && !gameManager.isGameOver)
+        if (transform.position.y > ceilLimit || transform.position.y < floorLimit)
+        {
+            gameManager.GameOver();
+        }
+        
+        if (Input.GetKeyDown("space"))
         {
             birdRigidBody.linearVelocity = Vector2.up * flapStrength;
         }
